@@ -1,24 +1,46 @@
 # InventarioFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+Para ejecutar de manera adecuada el programa, primero se deberá constar con los recursos necesarios, como las tecnologías de .net C#, Angular y postgreSql. 
+Como primera instancia, se debe crear la base de datos en postgre, se adjunta el cript necesario para su creación de base de datos y tablas necesarias:
 
-## Development server
+-- Crear la base de datos
+CREATE DATABASE cclinventario;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-- Conectarse a la base de datos recién creada
+\c cclinventario
 
-## Code scaffolding
+-- Crear la tabla de productos
+CREATE TABLE productos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad INTEGER NOT NULL DEFAULT 0
+);
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-- Insertar datos iniciales para pruebas
+INSERT INTO productos (nombre, cantidad) VALUES 
+('Laptop HP ProBook', 10),
+('Monitor Dell 24"', 15),
+('Teclado Logitech K380', 20),
+('Mouse Inalámbrico HP', 25),
+('Disco Duro SSD 500GB', 8),
+('Memoria RAM 16GB', 12),
+('Audífonos Sony', 5),
+('Cámara Web Logitech', 7),
+('Cable HDMI 2m', 30),
+('Router TP-Link', 3);
 
-## Build
+-- Verificar que los datos se hayan insertado correctamente
+SELECT * FROM productos;
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Luego, se deben descargar el back y el front respectivamente desde los repositorios compartidos.
+Con el id de preferencia (recomiendo Visual Studio y Visual Studio Code para back y front respectivamente), se abren los proyectos para visualizar las arquitecturas diseñadas.
+Una vez se desee, se ejecutan los proyectos, primero el back (documentado con swagger para verificar endpoints) y luego el front. En el FrontEnd, en la ruta src/environments/environment.prod.ts se dejó una variable correspondiente al 
+apiUrl, para que se apunte al back en el puerto deseado. 
+Finalmente se ejecuta el Front, de manera que se pueda interactuar con la plataforma, si el navegador no abre inmediatamente, puede abrir la url que facilita la terminal, pero por
+defecto, la ruta para el proyecto Angular es http://localhost:4200/.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
+Muchas gracias por probar el aplicativo.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
