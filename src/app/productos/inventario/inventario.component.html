@@ -3,10 +3,10 @@
     <!-- Tabla de inventario -->
     <div class="row mb-4">
       <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
           <h2>Inventario de Productos</h2>
           <button mat-raised-button color="primary" (click)="openProductModal()">
-            <mat-icon>add</mat-icon> Nuevo Producto
+            Nuevo Producto
           </button>
         </div>
         
@@ -17,7 +17,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Cantidad</th>
-                <th>Acciones</th>
+                <th class="text-center">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -25,12 +25,15 @@
                 <td>{{ producto.id }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.cantidad }}</td>
-                <td class="action-buttons">
-                  <button mat-icon-button color="primary" (click)="incrementarCantidad(producto)">
-                    <mat-icon>add_circle</mat-icon>
+                <td class="action-buttons d-flex justify-content-around">
+                  <button mat-raised-button color="primary" (click)="incrementarCantidad(producto)">
+                    Agregar
                   </button>
-                  <button mat-icon-button color="warn" [disabled]="producto.cantidad <= 0" (click)="decrementarCantidad(producto)">
-                    <mat-icon>remove_circle</mat-icon>
+                    <button mat-raised-button color="white" [disabled]="producto.cantidad <= 0" (click)="decrementarCantidad(producto)">
+                    Quitar
+                    </button>
+                  <button mat-raised-button color="warn" (click)="eliminarProducto(producto.id)">
+                    Eliminar producto
                   </button>
                 </td>
               </tr>
@@ -45,16 +48,13 @@
   <ng-template #productModal>
     <div class="modal-header">
       <h4 class="modal-title">Registrar Nuevo Producto</h4>
-      <button type="button" class="close" (click)="closeProductModal()">
-        <span>&times;</span>
-      </button>
     </div>
     <div class="modal-body">
       <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
         <div class="form-group">
           <label for="nombre">Nombre del Producto</label>
           <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
-          <div *ngIf="productoForm.get('nombre').invalid && productoForm.get('nombre').touched" class="text-danger">
+          <div *ngIf="productoForm.get('nombre')!.invalid && productoForm.get('nombre')!.touched" class="text-danger">
             El nombre es obligatorio
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
           <label for="cantidad">Cantidad</label>
           <input type="number" class="form-control" id="cantidad" formControlName="cantidad" min="0" required>
-          <div *ngIf="productoForm.get('cantidad').invalid && productoForm.get('cantidad').touched" class="text-danger">
+          <div *ngIf="productoForm.get('cantidad')!.invalid && productoForm.get('cantidad')!.touched" class="text-danger">
             La cantidad debe ser un número válido
           </div>
         </div>

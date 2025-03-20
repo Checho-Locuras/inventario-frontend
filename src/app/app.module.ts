@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // Define las rutas
 const routes: Routes = [
@@ -28,13 +29,15 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    InventarioComponent 
+    InventarioComponent,
+    LoginComponent 
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    ModalModule.forRoot(),
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,
