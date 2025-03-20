@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { InventarioComponent } from './productos/inventario/inventario.component';
 import { MovimientoComponent } from './productos/movimiento/movimiento.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
 export { routes };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes), AuthModule ],
+  exports: [RouterModule
+  ]
 })
 export class AppRoutingModule { }

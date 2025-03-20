@@ -1,16 +1,16 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
   <div class="card p-4" style="width: 20rem;">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <h2 class="text-center mb-4">Login</h2>
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
-        <input type="text" id="username" name="username" class="form-control" required autocomplete="username">
+        <input type="text" id="username" name="username" class="form-control" required autocomplete="username" formControlName="username">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password:</label>
-        <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password">
+        <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password" formControlName="password">
       </div>
-      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <button type="button" class="btn btn-primary w-100" (click)="login()">Login</button>
     </form>
   </div>
 </div>

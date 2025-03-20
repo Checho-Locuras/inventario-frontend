@@ -1,11 +1,11 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, Routes } from '@angular/router';
-import { AppComponent } from './app/app.component';
+import { Routes } from '@angular/router';
 import { LoginComponent } from './app/auth/login/login.component';
 import { InventarioComponent } from './app/productos/inventario/inventario.component';
 import { MovimientoComponent } from './app/productos/movimiento/movimiento.component';
 import { AuthGuard } from './app/auth/auth.guard';
-import { provideHttpClient } from '@angular/common/http';
+import { AppModule } from './app/app.module';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
 
 // Define las rutas
 const routes: Routes = [
@@ -17,9 +17,5 @@ const routes: Routes = [
 ];
 
 // Configura la aplicación con el enrutamiento
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes), // Provee las rutas
-    provideHttpClient()
-  ]
-}).catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch((err: any) => console.error(err));

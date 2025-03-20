@@ -3,7 +3,6 @@ import { ProductosService } from '../productos.service';
 
 @Component({
   selector: 'app-inventario',
-  standalone: true,
   templateUrl: './inventario.component.html',
   styleUrls: ['./inventario.component.css']
 })

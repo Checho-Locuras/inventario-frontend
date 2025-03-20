@@ -3,7 +3,6 @@ import { ProductosService } from '../productos.service';
 
 @Component({
   selector: 'app-movimiento',
-  standalone: true,
   templateUrl: './movimiento.component.html',
   styleUrls: ['./movimiento.component.css']
 })
