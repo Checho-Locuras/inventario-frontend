@@ -6,9 +6,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 // import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-inventario',
-  templateUrl: './inventario.component.html',
-  styleUrls: ['./inventario.component.css']
+    selector: 'app-inventario',
+    templateUrl: './inventario.component.html',
+    styleUrls: ['./inventario.component.css'],
+    standalone: false
 })
 export class InventarioComponent implements OnInit {
   productos: any[] = [];

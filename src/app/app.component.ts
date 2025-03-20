@@ -4,11 +4,12 @@ import { AuthService } from './auth/auth.service';
 import { LocalstorageService } from './shared/services/localstorage.service';
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
     <router-outlet></router-outlet>
   `,
-  styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   title = 'inventario-frontend';
