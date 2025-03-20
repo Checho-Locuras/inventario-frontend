@@ -85,12 +85,18 @@
               }
             ],
             "styles": [
+              "/node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5ef2e5b5-d808-449d-8ca3-2a44adfaa2d2"
   }
 }
