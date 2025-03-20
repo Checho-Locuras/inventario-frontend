@@ -1,1 +1,106 @@
-<p>inventario works!</p>
+<!-- inventario.component.html -->
+<div class="container">
+    <!-- Tabla de inventario -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>Inventario de Productos</h2>
+          <button mat-raised-button color="primary" (click)="openProductModal()">
+            <mat-icon>add</mat-icon> Nuevo Producto
+          </button>
+        </div>
+        
+        <div class="table-container">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos">
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="incrementarCantidad(producto)">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" [disabled]="producto.cantidad <= 0" (click)="decrementarCantidad(producto)">
+                    <mat-icon>remove_circle</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para nuevo producto -->
+  <ng-template #productModal>
+    <div class="modal-header">
+      <h4 class="modal-title">Registrar Nuevo Producto</h4>
+      <button type="button" class="close" (click)="closeProductModal()">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        <div class="form-group">
+          <label for="nombre">Nombre del Producto</label>
+          <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+          <div *ngIf="productoForm.get('nombre').invalid && productoForm.get('nombre').touched" class="text-danger">
+            El nombre es obligatorio
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" formControlName="cantidad" min="0" required>
+          <div *ngIf="productoForm.get('cantidad').invalid && productoForm.get('cantidad').touched" class="text-danger">
+            La cantidad debe ser un número válido
+          </div>
+        </div>
+        
+        <div class="form-group mt-3">
+          <button type="submit" mat-raised-button color="primary" [disabled]="productoForm.invalid">Guardar</button>
+          <button type="button" mat-button (click)="closeProductModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  
+  <!-- Alternativa con MatCard en lugar de modal -->
+  <!-- <mat-card *ngIf="showProductForm" class="mb-4">
+    <mat-card-header>
+      <mat-card-title>Registrar Nuevo Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nombre del Producto</mat-label>
+            <input matInput formControlName="nombre" required>
+            <mat-error *ngIf="productoForm.get('nombre').invalid">El nombre es obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" formControlName="cantidad" min="0" required>
+            <mat-error *ngIf="productoForm.get('cantidad').invalid">La cantidad debe ser un número válido</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="productoForm.invalid" (click)="guardarProducto()">Guardar</button>
+      <button mat-button (click)="toggleProductForm()">Cancelar</button>
+    </mat-card-actions>
+  </mat-card> -->
