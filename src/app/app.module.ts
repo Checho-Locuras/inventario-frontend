@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoginComponent } from './auth/login/login.component';
 import { InventarioComponent } from './productos/inventario/inventario.component';
 import { AuthGuard } from './auth/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AuthInterceptor } from './auth/Interceptor/auth.interceptor';
 
 // Define las rutas
 const routes: Routes = [
@@ -47,7 +48,10 @@ const routes: Routes = [
     MatIconModule,
     MatTableModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } // Provee AuthInterceptor
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

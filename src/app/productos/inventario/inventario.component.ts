@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ProductosService } from '../productos.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'app-inventario',
@@ -20,7 +21,8 @@ export class InventarioComponent implements OnInit {
   constructor(
     private productosService: ProductosService,
     private formBuilder: FormBuilder,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -128,6 +130,12 @@ export class InventarioComponent implements OnInit {
           alert('Error al eliminar el producto');
         }
       });
+    }
+  }
+
+  close(): void {
+    if (confirm('¿Está seguro de que desea salir?')) {
+      this.authService.logout();
     }
   }
 }
